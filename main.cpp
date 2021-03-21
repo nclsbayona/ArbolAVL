@@ -36,24 +36,18 @@ int main(int argc, char** argv){
                     continue;
                 else{
                     tokenize<T>(line, operation, id);
-                    if (operation=="A")
-                        cout<<"\nInsertado "<<decide<T>(operation, id, RN, AVL);
-                    else if (operation=="E")
-                        cout<<"\nEliminado "<<decide<T>(operation, id, RN, AVL);
-                    cout<<"\nAVL: "<<AVL.inOrder(true)<<"\nRN"<<printRB<T>(RN)<<"\n";
-                    if (!AVL.balanced())
-                    cout<<"AVL no balanceado"<<'\n';
-                    if (!compare(AVL.inOrder(), RN))
-                        cout<<"No son iguales"<<'\n';
-                    else
-                        cout<<"Si son iguales"<<'\n';
-                    cout<<'\n'<<++i<<" total\n";
-                    //cin.getline(line, MAX, '\n');
+                    cout<<"\nInsertado "<<decide<T>(operation, id, RN, AVL);
+                    cout<<"Van "<<++i<<endl;
+                    decide<T>(operation, id, RN, AVL);
+                    if (!compare<T>(AVL.inOrder(), RN)||!AVL.balanced()){
+                        cout<<"Aquí hay un problema";
+                        cin.getline(line, MAX, '\n');
+                    }
                 }
             }
             in.close();
         }
-        
+        cout<<'\n';
         if (!AVL.balanced())
             cout<<"AVL no balanceado"<<'\n';
         if (!compare(AVL.inOrder(), RN))

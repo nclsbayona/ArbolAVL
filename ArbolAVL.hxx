@@ -194,7 +194,7 @@ bool ArbolAVL<T>::removeNode(T node){
     NodoAVL<T>*padre=this->searchNodeFather(node);
     if (!padre)
         return 0;
-    std::cout<<"Eliminación starting\n"<<padre->toString()<<"\n";
+    //std::cout<<"Eliminación starting\n"<<padre->toString()<<"\n";
     NodoAVL<T>*nodo;
     if (padre==this->head&&this->head->getData()==node)
             nodo=padre;
@@ -219,7 +219,7 @@ bool ArbolAVL<T>::removeNode(T node){
     else
         this->removeNodeMinor(nodo);
     this->balance(padre);
-    std::cout<<"Eliminación afterwards\n"<<padre->toString()<<"\n";
+    //std::cout<<"Eliminación afterwards\n"<<padre->toString()<<"\n";
     return true;
 }
 
@@ -331,7 +331,7 @@ bool ArbolAVL<T>::balance(NodoAVL<T>*& node){
     NodoAVL<T>* fath=NULL;
     while (ft!=lastFather){
         if (!this->nodeBalanced(ft)){
-            std::cout<<"Hay que arreglar "<<ft->toString()<<"\n";
+            //std::cout<<"Hay que arreglar "<<ft->toString()<<"\n";
             if (ft->getLeft()&&!ft->getRight()){
                 if (!ft->getLeft()->getRight()){
                     toAc=ft->rightRotation();
@@ -395,10 +395,9 @@ bool ArbolAVL<T>::balance(NodoAVL<T>*& node){
             }
             else{
                 //Tiene izq y derecho
-                
                 //Izq más alto
                 if (ft->getLeft()->height()-ft->getRight()->height()>1){
-                    std::cout<<"Caso de izquierdo más alto\n";
+                    //std::cout<<"Caso de izquierdo más alto\n";
                     if (!ft->getLeft()->getRight()||ft->getLeft()->getLeft()->height()-ft->getLeft()->getRight()->height()>0){
                        fath=this->searchNodeFather(ft);
                         toAc=ft->rightRotation();
@@ -425,23 +424,10 @@ bool ArbolAVL<T>::balance(NodoAVL<T>*& node){
                     }
                 } else if (ft->getLeft()->height()-ft->getRight()->height()<1){
                     //Derecho más alto
+                    char n;
                     std::cout<<"Caso de derecho más alto\n";
-                    if (!ft->getRight()->getRight()||ft->getRight()->getLeft()->height()-ft->getRight()->getRight()->height()>0){
-                        std::cout<<"Caso 1\n";
+                    if (!ft->getRight()->getLeft()){
                         fath=this->searchNodeFather(ft);
-                        toAc=ft->composedRotation2();
-                        if (ft==this->head){
-                            this->setHead(toAc);
-                        } else{
-                            if (fath->getLeft()==ft)
-                                fath->setLeft(toAc);
-                            else
-                                fath->setRight(toAc);
-                        }
-                    }
-                    else if (!ft->getRight()->getLeft()||ft->getRight()->getLeft()->height()-ft->getRight()->getRight()->height()<0){
-                        std::cout<<"Caso 2\n";
-                       fath=this->searchNodeFather(ft);
                         toAc=ft->leftRotation();
                         if (ft==this->head){
                             this->setHead(toAc);
@@ -452,13 +438,25 @@ bool ArbolAVL<T>::balance(NodoAVL<T>*& node){
                                 fath->setRight(toAc);
                         }
                     }
+                    else{
+                        fath=this->searchNodeFather(ft);
+                        toAc=ft->composedRotation2();
+                        if (ft==this->head){
+                            this->setHead(toAc);
+                        } else{
+                            if (fath->getLeft()==ft)
+                                fath->setLeft(toAc);
+                            else
+                                fath->setRight(toAc);
+                        }  
+                    }
                 }
             }
-            std::cout<<"Despues de arreglos para balancear\n"<<this->searchNodeFather(ft)->toString()<<"\n";
+            //std::cout<<"Despues de arreglos para balancear\n"<<this->searchNodeFather(ft)->toString()<<"\n";
         }
         lastFather=ft;
         ft=this->searchNodeFather(ft);
     }
-    std::cout<<"Antes de salir del metodo\n"<<node->toString()<<"\n";
+    //std::cout<<"Antes de salir del metodo\n"<<node->toString()<<"\n";
     return 1;
 }

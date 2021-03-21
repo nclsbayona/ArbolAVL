@@ -1,5 +1,5 @@
 #include "NodoAVL.h"
-#include <iostream>
+//#include <iostream>
 template <class T>
 T NodoAVL<T>::getData(){
     return this->data;
@@ -226,7 +226,7 @@ int NodoAVL<T>::height(int acu){
 
 template <class T>
 NodoAVL<T>* NodoAVL<T>::composedRotation1 (){
-    std::cout<<"Aplicando LRR: "<<this->toString()<<'\n';
+    //std::cout<<"Aplicando LRR: "<<this->toString()<<'\n';
     NodoAVL<T>* temp=this->getLeft();
     NodoAVL<T>* temp2=temp->leftRotation();
     this->setLeft(temp2);
@@ -235,7 +235,7 @@ NodoAVL<T>* NodoAVL<T>::composedRotation1 (){
 
 template <class T>
 NodoAVL<T>* NodoAVL<T>::composedRotation2 (){
-    std::cout<<"Aplicando RLR: "<<this->toString()<<'\n';
+    //std::cout<<"Aplicando RLR: "<<this->toString()<<'\n';
     NodoAVL<T>* temp=this->getRight();
     if (!temp)
         return NULL;
@@ -246,7 +246,7 @@ NodoAVL<T>* NodoAVL<T>::composedRotation2 (){
 
 template <class T>
 NodoAVL<T>* NodoAVL<T>::leftRotation (){
-    std::cout<<"Aplicando LR: "<<this->toString()<<'\n';
+    //std::cout<<"Aplicando LR: "<<this->toString()<<'\n';
     NodoAVL<T>* temp=this->getRight();
     if (!temp)
         return NULL;
@@ -259,7 +259,7 @@ NodoAVL<T>* NodoAVL<T>::leftRotation (){
 
 template <class T>
 NodoAVL<T>* NodoAVL<T>::rightRotation (){
-    std::cout<<"Aplicando RR: "<<this->toString()<<'\n';
+    //std::cout<<"Aplicando RR: "<<this->toString()<<'\n';
     NodoAVL<T>* temp=this->getLeft();
     //std::cout<<"Temp: "<<temp->toString()<<'\n';
     if (!temp)
